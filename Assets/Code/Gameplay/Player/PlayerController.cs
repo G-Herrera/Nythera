@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
-    public Vector2 moveInput;
+    [HideInInspector] public Vector2 moveInput;
+    public Vector2 LookInput => lookInput;
 
     Rigidbody2D playerRb;
     PlayerInputActions playerControls;
 
+    private Vector2 lookInput;
     private bool isGrounded;
     private bool jumpPressed;
 
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         
         moveInput = playerControls.Player.Move.ReadValue<Vector2>();
+
+        lookInput = playerControls.Player.Look.ReadValue<Vector2>();
 
         jumpPressed = playerControls.Player.Jump.IsPressed();
 
