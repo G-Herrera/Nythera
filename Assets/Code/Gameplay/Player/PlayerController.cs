@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Move Settings")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Transform graphics;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 10f;
@@ -23,15 +24,20 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerRb;
     PlayerInputActions playerControls;
+    PlayerAnimation playerAnimation;
 
     private Vector2 lookInput;
     private bool isGrounded;
     private bool jumpPressed;
 
+    //Propierties
+    public bool IsFacingRight { get; private set; } = false;
+
     private void Awake()
     {
         playerControls = new PlayerInputActions();
         playerRb = GetComponent<Rigidbody2D>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     private void OnEnable()
@@ -61,6 +67,10 @@ public class PlayerController : MonoBehaviour
 
         lookInput = playerControls.Player.Look.ReadValue<Vector2>();
 
+        playerAnimation.UpdateMovement(Mathf.Abs(moveInput.x));
+
+        playerAnimation.UpdateGrounded(isGrounded);
+
         jumpPressed = playerControls.Player.Jump.IsPressed();
 
     }
@@ -73,6 +83,8 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = new Vector2(moveInput.x * moveSpeed, playerRb.velocity.y);
 
         BetterJump();
+
+        Flip();
 
     }
 
@@ -98,6 +110,30 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded) return;
         playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
+    }
+
+    private void Flip()
+    {
+        if (moveInput.x > 0 && !IsFacingRight)
+        {
+            SetFacingDirection(true);
+
+        }
+        else if (moveInput.x < 0 && IsFacingRight)
+        {
+            SetFacingDirection(false);
+        }
+    }
+
+    private void SetFacingDirection(bool facingRight)
+    {
+        IsFacingRight = facingRight;
+
+        Vector3 scale = graphics.localScale;
+
+        scale.x = facingRight ? -1f : 1f;
+
+        graphics.localScale = scale;
     }
 
     private void OnDrawGizmosSelected()
