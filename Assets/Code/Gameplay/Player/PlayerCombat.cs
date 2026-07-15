@@ -12,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float attackAngle = 90f;
     [SerializeField] private float attackSpeed = 450f;
     [SerializeField] private float attackCooldown = 0.5f;
+    [SerializeField] private PlayerController playerController;
 
     private PlayerInputActions playerControls;
     private bool canAttack = true;
@@ -20,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerInputActions();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void OnEnable()
@@ -72,7 +74,9 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator SwingWeapon()
     {
-        Quaternion targetRotation = initialRotation * Quaternion.Euler(0f, 0f, -attackAngle);
+        //float direction = IsFacingRight ? 1f : -1f;
+
+        Quaternion targetRotation = initialRotation * Quaternion.Euler(0f, 0f, attackAngle);
 
         yield return RotateWeapon(initialRotation, targetRotation, attackDuration);
 
