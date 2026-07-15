@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlataformaMovil : MonoBehaviour
@@ -19,5 +17,24 @@ public class PlataformaMovil : MonoBehaviour
             transform.position = posicionInicial + new Vector3(0, movimiento, 0);
         else
             transform.position = posicionInicial + new Vector3(movimiento, 0, 0);
+    }
+
+    // --- Lógica para "pegar" al jugador ---
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Hace al jugador hijo de la plataforma
+            collision.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Libera al jugador cuando salta o se baja
+            collision.transform.SetParent(null);
+        }
     }
 }

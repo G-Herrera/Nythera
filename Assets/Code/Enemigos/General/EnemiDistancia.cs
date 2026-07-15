@@ -1,38 +1,54 @@
 using UnityEngine;
+using System.Collections;
 
-// Aseguramos que el objeto tenga SistemaVida. 
-// Quitamos la herencia de "SistemaVida" y usamos MonoBehaviour.
-[RequireComponent(typeof(SistemaVida))]
-public class EnemigoDistancia : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(SistemaVida), typeof(Knockback))]
+public class EnemigoDistancia : MonoBehaviour, IDamageable
 {
     [Header("Configuración de Disparo")]
     public GameObject prefabProyectil;
-    public Transform puntoDisparo;
+    public Transform rotadorPuntoDisparo; // El objeto vacío que rota
+    public Transform puntoDisparo;        // El punto donde sale la bala
     public float rangoDeteccion = 8f;
     public float cadenciaDisparo = 2f;
 
+    private bool siendoEmpujado = false;
     private float tiempoProximoDisparo;
     private Transform jugador;
-    private SistemaVida vida; // Referencia al componente
+    private SpriteRenderer sr;
+    private float offsetXInicial; // Guardamos la posición original
 
     void Start()
     {
-        // Obtenemos la referencia al componente de vida que está en este mismo objeto
-        vida = GetComponent<SistemaVida>();
+        sr = GetComponent<SpriteRenderer>();
+        // Guardamos la distancia inicial al centro para corregirla después
+        offsetXInicial = puntoDisparo.localPosition.x;
 
         GameObject objJugador = GameObject.FindGameObjectWithTag("Player");
-        if (objJugador != null)
-        {
-            jugador = objJugador.transform;
-        }
+        if (objJugador != null) jugador = objJugador.transform;
     }
 
     void Update()
     {
-        if (jugador == null) return;
+        if (jugador == null || siendoEmpujado) return;
 
+        // 1. Giro del ROTADOR hacia el jugador
+        Vector3 direccion = jugador.position - rotadorPuntoDisparo.position;
+        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+        rotadorPuntoDisparo.rotation = Quaternion.Euler(0, 0, angulo);
+
+        // 2. Control de dirección y corrección de posición
+        if (sr != null)
+        {
+            bool mirandoDerecha = jugador.position.x > transform.position.x;
+            sr.flipX = !mirandoDerecha;
+
+            // Corregimos la posición del punto de disparo para que no se vaya a la espalda
+            float nuevoX = mirandoDerecha ? Mathf.Abs(offsetXInicial) : -Mathf.Abs(offsetXInicial);
+            puntoDisparo.localPosition = new Vector3(nuevoX, puntoDisparo.localPosition.y, puntoDisparo.localPosition.z);
+        }
+
+        // 3. Lógica de disparo
         float distancia = Vector2.Distance(transform.position, jugador.position);
-
         if (distancia <= rangoDeteccion)
         {
             if (Time.time >= tiempoProximoDisparo)
@@ -43,20 +59,25 @@ public class EnemigoDistancia : MonoBehaviour
         }
     }
 
+    public void TakeDamage(AttackData data)
+    {
+        GetComponent<SistemaVida>().RecibirDano(data);
+        GetComponent<Knockback>().AplicarEmpuje(data);
+        StartCoroutine(PausaMovimiento(0.25f));
+    }
+
+    private IEnumerator PausaMovimiento(float tiempo)
+    {
+        siendoEmpujado = true;
+        yield return new WaitForSeconds(tiempo);
+        siendoEmpujado = false;
+    }
+
     void Disparar()
     {
-        // 1. Calculamos la dirección hacia el jugador
-        Vector2 direccion = (jugador.position - puntoDisparo.position).normalized;
-
-        // 2. Calculamos el ángulo en grados para rotar el objeto
-        // Mathf.Atan2 nos da el ángulo en radianes, * Mathf.Rad2Deg lo convierte a grados
-        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
-
-        // 3. Instanciamos el proyectil con la rotación calculada
-        GameObject bala = Instantiate(prefabProyectil, puntoDisparo.position, Quaternion.Euler(0, 0, angulo));
-
-        // 4. (Opcional) Si quieres que el enemigo también mire al jugador
-        if (direccion.x > 0) transform.localScale = new Vector3(1, 1, 1);
-        else transform.localScale = new Vector3(-1, 1, 1);
+        if (prefabProyectil != null && puntoDisparo != null)
+        {
+            Instantiate(prefabProyectil, puntoDisparo.position, rotadorPuntoDisparo.rotation);
+        }
     }
 }

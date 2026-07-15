@@ -1,38 +1,33 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events; // Necesario para eventos personalizados en el Inspector
+using UnityEngine.Events;
+using System.Collections;
 
 public class SistemaVida : MonoBehaviour
 {
-    [Header("Estadísticas de Vida")]
-    // El jugador empieza con 100 pts de vida, los enemigos pueden ajustarse en el inspector
+    [Header("Estadísticas")]
     public float vidaMaxima = 100f;
     private float vidaActual;
 
-    [Header("Estado de Combate")]
+    [Header("Estado")]
     public bool esInvulnerable = false;
 
-    [Header("Eventos (Asignar en Inspector)")]
-    // Aquí conectaremos qué pasa cuando recibe daño (ej. parpadeo rojo)
+    [Header("Eventos")]
     public UnityEvent OnRecibirDano;
-    // Aquí conectaremos qué pasa cuando muere (ej. jugador reaparece, enemigo desaparece)
     public UnityEvent OnMorir;
 
-    void Start()
+    void Awake()
     {
-        // Al iniciar, la vida actual siempre se llena al máximo
         vidaActual = vidaMaxima;
     }
 
     // Método universal para recibir daño
-    public void RecibirDano(float cantidad)
+    public void RecibirDano(AttackData data)
     {
-        // Si el personaje está en medio del dash y tiene invulnerabilidad, ignoramos el daño
         if (esInvulnerable) return;
 
-        vidaActual -= cantidad;
+        vidaActual -= data.Damage;
 
-        // Disparamos el evento de recibir daño para reproducir sonidos o animaciones
+        // Disparamos el evento (aquí conectas el parpadeo rojo o efectos)
         OnRecibirDano?.Invoke();
 
         if (vidaActual <= 0)
@@ -42,17 +37,14 @@ public class SistemaVida : MonoBehaviour
         }
     }
 
-    // Método universal para curarse (Ideal para las zonas de descanso)
+    // Método universal para curarse
     public void Curar(float cantidad)
     {
         vidaActual += cantidad;
-        if (vidaActual > vidaMaxima)
-        {
-            vidaActual = vidaMaxima; // Evita que la vida supere el máximo
-        }
+        if (vidaActual > vidaMaxima) vidaActual = vidaMaxima;
     }
 
-    // Método que el script del PlayerController puede llamar al hacer Dash
+    // Método para la invulnerabilidad (usado en el Dash del Player)
     public void ActivarInvulnerabilidadTemporal(float tiempo)
     {
         StartCoroutine(RutinaInvulnerabilidad(tiempo));
@@ -67,13 +59,9 @@ public class SistemaVida : MonoBehaviour
 
     private void Morir()
     {
-        // Dispara el evento de muerte
+        // Esto dispara lo que configuraste en el Inspector (desactivar objeto, animaciones, etc.)
         OnMorir?.Invoke();
     }
 
-    // Método extra opcional por si necesitas consultar cuánta vida tiene desde otro script
-    public float ObtenerVidaActual()
-    {
-        return vidaActual;
-    }
+    public float ObtenerVidaActual() => vidaActual;
 }

@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class EnemigoCaminante : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(SistemaVida), typeof(Knockback))]
+public class EnemigoCaminante : MonoBehaviour, IDamageable
 {
     private enum Estado { Patrullando, Persiguiendo }
     private Estado estadoActual;
@@ -9,20 +10,20 @@ public class EnemigoCaminante : MonoBehaviour
     [Header("Configuración de Movimiento")]
     public float velocidadPatrulla = 2f;
     public float velocidadPersecucion = 4f;
+    private bool siendoEmpujado = false; // Bloquea el movimiento al recibir golpe
 
     [Header("Detección del Jugador")]
     public float rangoVision = 5f;
-    public float rangoAtaque = 1f; // Distancia a la que se detiene para atacar
+    public float rangoAtaque = 1f;
     private Transform jugador;
 
     [Header("Ruta de Patrullaje")]
-    [Tooltip("Añade aquí todos los puntos (GameObjects vacíos) por donde quieres que pase el enemigo.")]
-    public Transform[] puntosPatrullaje; // ¡Un arreglo para poner los puntos que quieras!
+    public Transform[] puntosPatrullaje;
     private int indicePuntoActual = 0;
 
     [Header("Configuración de Ataque")]
     public float dañoAtaque = 10f;
-    public float frecuenciaAtaque = 1f; // Cada cuánto ataca
+    public float frecuenciaAtaque = 1f;
     private float tiempoUltimoAtaque;
 
     private Rigidbody2D rb;
@@ -32,92 +33,86 @@ public class EnemigoCaminante : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         estadoActual = Estado.Patrullando;
-
-        // Buscamos automáticamente al jugador usando el Tag "Player"
         GameObject objJugador = GameObject.FindGameObjectWithTag("Player");
-        if (objJugador != null)
-        {
-            jugador = objJugador.transform;
-        }
+        if (objJugador != null) jugador = objJugador.transform;
     }
 
     void Update()
     {
-        if (jugador == null) return;
+        if (jugador == null || siendoEmpujado) return; // Si está siendo empujado, no se mueve solo
 
-        // Calculamos a qué distancia está el jugador
         float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
 
         switch (estadoActual)
         {
             case Estado.Patrullando:
                 Patrullar();
-
-                // Si el jugador entra en su rango de visión, cambia a persecución
-                if (distanciaAlJugador <= rangoVision)
-                {
-                    estadoActual = Estado.Persiguiendo;
-                }
+                if (distanciaAlJugador <= rangoVision) estadoActual = Estado.Persiguiendo;
                 break;
-
             case Estado.Persiguiendo:
-                // Si el jugador sale del rango, vuelve a su patrón de patrullaje
-                if (distanciaAlJugador > rangoVision)
-                {
-                    estadoActual = Estado.Patrullando;
-                }
-                else
-                {
-                    Perseguir();
-                }
+                if (distanciaAlJugador > rangoVision) estadoActual = Estado.Patrullando;
+                else Perseguir();
                 break;
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SistemaVida vidaJugador = collision.gameObject.GetComponent<SistemaVida>();
+            if (vidaJugador != null)
+            {
+                // Enviamos el daño al chocar
+                AttackData ataque = new AttackData((int)dañoAtaque, 0f, Vector2.zero);
+                vidaJugador.RecibirDano(ataque);
+            }
+        }
+    }
+
+    public void TakeDamage(AttackData data)
+    {
+        // 1. Restar vida
+        GetComponent<SistemaVida>().RecibirDano(data);
+
+        // 2. Empujar
+        GetComponent<Knockback>().AplicarEmpuje(data);
+
+        // 3. Pausar movimiento automático para que se note el empuje
+        StartCoroutine(PausaMovimiento(0.25f));
+    }
+
+    private IEnumerator PausaMovimiento(float tiempo)
+    {
+        siendoEmpujado = true;
+        yield return new WaitForSeconds(tiempo);
+        siendoEmpujado = false;
+    }
+
     private void Patrullar()
     {
-        // Si no le asignaste ningún punto en el inspector, que no haga nada para evitar errores
         if (puntosPatrullaje.Length == 0) return;
-
         Transform destinoActual = puntosPatrullaje[indicePuntoActual];
-
-        // Calculamos la dirección hacia el destino
         Vector2 direccion = (destinoActual.position - transform.position).normalized;
         rb.velocity = new Vector2(direccion.x * velocidadPatrulla, rb.velocity.y);
-
         DeterminarDireccionMirada(direccion.x);
 
-        // Si ya llegó (o está muy cerca) al punto de patrullaje, pasa al siguiente
-        // Pon esta en su lugar:
         if (Mathf.Abs(transform.position.x - destinoActual.position.x) < 0.5f)
         {
-            indicePuntoActual++;
-
-            // Si ya llegó al último punto de la lista, reinicia al primero
-            if (indicePuntoActual >= puntosPatrullaje.Length)
-            {
-                indicePuntoActual = 0;
-            }
+            indicePuntoActual = (indicePuntoActual + 1) % puntosPatrullaje.Length;
         }
     }
 
     private void Perseguir()
     {
         float distanciaX = Mathf.Abs(jugador.position.x - transform.position.x);
-
         if (distanciaX <= rangoAtaque)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
-
-            // --- AQUÍ ESTÁ LA LÓGICA DE ATAQUE ---
-            if (Time.time >= tiempoUltimoAtaque + frecuenciaAtaque)
-            {
-                AtacarJugador();
-            }
+            if (Time.time >= tiempoUltimoAtaque + frecuenciaAtaque) AtacarJugador();
         }
         else
         {
-            // Moverse hacia el jugador
             Vector2 direccion = (jugador.position - transform.position).normalized;
             rb.velocity = new Vector2(direccion.x * velocidadPersecucion, rb.velocity.y);
             DeterminarDireccionMirada(direccion.x);
@@ -127,27 +122,18 @@ public class EnemigoCaminante : MonoBehaviour
     private void AtacarJugador()
     {
         tiempoUltimoAtaque = Time.time;
-
-        // Buscamos el componente SistemaVida en el jugador
         SistemaVida vidaJugador = jugador.GetComponent<SistemaVida>();
-
         if (vidaJugador != null)
         {
-            vidaJugador.RecibirDano(dañoAtaque);
-            Debug.Log("¡El enemigo atacó al jugador!");
+            Vector2 direccionAtaque = (jugador.position - transform.position).normalized;
+            AttackData ataque = new AttackData((int)dañoAtaque, 5f, direccionAtaque);
+            vidaJugador.RecibirDano(ataque);
         }
     }
 
     private void DeterminarDireccionMirada(float direccionX)
     {
-        if (direccionX > 0 && !mirandoDerecha)
-        {
-            Voltear();
-        }
-        else if (direccionX < 0 && mirandoDerecha)
-        {
-            Voltear();
-        }
+        if ((direccionX > 0 && !mirandoDerecha) || (direccionX < 0 && mirandoDerecha)) Voltear();
     }
 
     private void Voltear()
@@ -158,31 +144,9 @@ public class EnemigoCaminante : MonoBehaviour
         transform.localScale = escala;
     }
 
-    // Dibujamos guías visuales en el editor
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, rangoVision);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rangoAtaque);
-
-        // Dibuja una línea celeste que conecta la ruta de patrullaje en el editor
-        if (puntosPatrullaje != null && puntosPatrullaje.Length > 1)
-        {
-            Gizmos.color = Color.cyan;
-            for (int i = 0; i < puntosPatrullaje.Length - 1; i++)
-            {
-                if (puntosPatrullaje[i] != null && puntosPatrullaje[i + 1] != null)
-                {
-                    Gizmos.DrawLine(puntosPatrullaje[i].position, puntosPatrullaje[i + 1].position);
-                }
-            }
-            // Cierra el ciclo dibujando una línea del último punto al primero
-            if (puntosPatrullaje[0] != null && puntosPatrullaje[puntosPatrullaje.Length - 1] != null)
-            {
-                Gizmos.DrawLine(puntosPatrullaje[puntosPatrullaje.Length - 1].position, puntosPatrullaje[0].position);
-            }
-        }
+        Gizmos.color = Color.yellow; Gizmos.DrawWireSphere(transform.position, rangoVision);
+        Gizmos.color = Color.red; Gizmos.DrawWireSphere(transform.position, rangoAtaque);
     }
 }
