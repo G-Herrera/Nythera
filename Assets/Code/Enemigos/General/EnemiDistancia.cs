@@ -6,8 +6,8 @@ public class EnemigoDistancia : MonoBehaviour, IDamageable
 {
     [Header("Configuración de Disparo")]
     public GameObject prefabProyectil;
-    public Transform rotadorPuntoDisparo; // El objeto vacío que rota
-    public Transform puntoDisparo;        // El punto donde sale la bala
+    public Transform rotadorPuntoDisparo; // Objeto vacío hijo que pivota
+    public Transform puntoDisparo;        // Objeto donde sale la bala
     public float rangoDeteccion = 8f;
     public float cadenciaDisparo = 2f;
 
@@ -15,12 +15,12 @@ public class EnemigoDistancia : MonoBehaviour, IDamageable
     private float tiempoProximoDisparo;
     private Transform jugador;
     private SpriteRenderer sr;
-    private float offsetXInicial; // Guardamos la posición original
+    private float offsetXInicial;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        // Guardamos la distancia inicial al centro para corregirla después
+        // Guardamos la posición original del punto de disparo para corregirla
         offsetXInicial = puntoDisparo.localPosition.x;
 
         GameObject objJugador = GameObject.FindGameObjectWithTag("Player");
@@ -31,23 +31,29 @@ public class EnemigoDistancia : MonoBehaviour, IDamageable
     {
         if (jugador == null || siendoEmpujado) return;
 
-        // 1. Giro del ROTADOR hacia el jugador
+        // 1. Cálculo del ángulo hacia el jugador
         Vector3 direccion = jugador.position - rotadorPuntoDisparo.position;
         float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
-        rotadorPuntoDisparo.rotation = Quaternion.Euler(0, 0, angulo);
 
-        // 2. Control de dirección y corrección de posición
-        if (sr != null)
+        // 2. Control de dirección (Flip) y corrección de rotación
+        bool mirandoDerecha = jugador.position.x > transform.position.x;
+        sr.flipX = !mirandoDerecha;
+
+        // Si mira a la izquierda, sumamos 180 grados para compensar el giro del sprite
+        if (!mirandoDerecha)
         {
-            bool mirandoDerecha = jugador.position.x > transform.position.x;
-            sr.flipX = !mirandoDerecha;
-
-            // Corregimos la posición del punto de disparo para que no se vaya a la espalda
-            float nuevoX = mirandoDerecha ? Mathf.Abs(offsetXInicial) : -Mathf.Abs(offsetXInicial);
-            puntoDisparo.localPosition = new Vector3(nuevoX, puntoDisparo.localPosition.y, puntoDisparo.localPosition.z);
+            rotadorPuntoDisparo.rotation = Quaternion.Euler(0, 0, angulo + 180);
+        }
+        else
+        {
+            rotadorPuntoDisparo.rotation = Quaternion.Euler(0, 0, angulo);
         }
 
-        // 3. Lógica de disparo
+        // 3. Corrección de posición (evita que el punto salga por la espalda)
+        float nuevoX = mirandoDerecha ? Mathf.Abs(offsetXInicial) : -Mathf.Abs(offsetXInicial);
+        puntoDisparo.localPosition = new Vector3(nuevoX, puntoDisparo.localPosition.y, puntoDisparo.localPosition.z);
+
+        // 4. Lógica de disparo
         float distancia = Vector2.Distance(transform.position, jugador.position);
         if (distancia <= rangoDeteccion)
         {
@@ -77,6 +83,7 @@ public class EnemigoDistancia : MonoBehaviour, IDamageable
     {
         if (prefabProyectil != null && puntoDisparo != null)
         {
+            // Instancia la bala con la rotación del rotador
             Instantiate(prefabProyectil, puntoDisparo.position, rotadorPuntoDisparo.rotation);
         }
     }
