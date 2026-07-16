@@ -46,19 +46,19 @@ public class SistemaHUD : MonoBehaviour
     // --- MÉTODOS DE MAPA ---
     public void AbrirMapa()
     {
-        mapaAbierto = true;
+        if (camaraMapa != null) camaraMapa.SetActive(true); // Verificación de seguridad
         panelMapa.SetActive(true);
-        camaraMapa.SetActive(true);
-        // Opcional: Time.timeScale = 0f; si quieres que el juego se pause al ver el mapa
-        Time.timeScale = 0f; // Detiene el tiempo
+        mapaAbierto = true;
 
+        Time.timeScale = 0f; // Esto detendrá las físicas y animaciones
     }
 
     public void CerrarMapa()
     {
-        mapaAbierto = false;
+        if (camaraMapa != null) camaraMapa.SetActive(false);
         panelMapa.SetActive(false);
-        camaraMapa.SetActive(false);
+        mapaAbierto = false;
+
         Time.timeScale = 1f;
     }
 }
