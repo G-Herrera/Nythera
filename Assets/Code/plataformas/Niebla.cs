@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NieblaMapa : MonoBehaviour
+public class NieblaMapaContinuo : MonoBehaviour
 {
     [Header("Referencias")]
     public Transform jugador;
@@ -9,19 +9,20 @@ public class NieblaMapa : MonoBehaviour
     public RectTransform iconoJugador;
 
     [Header("Configuración de la Textura")]
-    public int anchoTextura = 256;
-    public int altoTextura = 256;
-    public int radioPincel = 15;
+    public int anchoTextura = 512;
+    public int altoTextura = 512;
+    public int radioPincel = 22;
 
     [Header("Límites del Mundo (Nivel Carlos)")]
-    public Vector2 minMundo = new Vector2(-10f, -5f);
-    public Vector2 maxMundo = new Vector2(60f, 30f);
+    public Vector2 minMundo = new Vector2(-25f, -12f);
+    public Vector2 maxMundo = new Vector2(25f, 12f);
 
-    [Header("Límites del Panel en la UI")]
-    public Vector2 minUI = new Vector2(-400f, -200f);
-    public Vector2 maxUI = new Vector2(400f, 200f);
+    [Header("Ajuste Fino (Offset)")]
+    public Vector2 desplazamientoMundo = Vector2.zero;
 
     private Texture2D texturaNiebla;
+    private Vector2 ultimaPosicionTextura;
+    private bool inicializado = false;
 
     void Awake()
     {
@@ -29,9 +30,18 @@ public class NieblaMapa : MonoBehaviour
         InicializarTextura();
     }
 
-    void OnEnable()
+    void Start()
     {
         BuscarJugador();
+        if (jugador != null)
+        {
+            // Posición inicial para evitar saltos al arrancar
+            Vector2 posInicial = (Vector2)jugador.position + desplazamientoMundo;
+            float nx = Mathf.InverseLerp(minMundo.x, maxMundo.x, posInicial.x);
+            float ny = Mathf.InverseLerp(minMundo.y, maxMundo.y, posInicial.y);
+            ultimaPosicionTextura = new Vector2(Mathf.RoundToInt(nx * anchoTextura), Mathf.RoundToInt(ny * altoTextura));
+            inicializado = true;
+        }
     }
 
     void BuscarJugador()
@@ -67,63 +77,98 @@ public class NieblaMapa : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            ActualizarMapaUI();
-        }
-    }
-
-    void ActualizarMapaUI()
-    {
         if (jugador == null)
         {
             BuscarJugador();
             return;
         }
 
-        // 1. Mapeamos la posición del jugador en el mundo a porcentajes (0 a 1)
-        float normalX = Mathf.InverseLerp(minMundo.x, maxMundo.x, jugador.position.x);
-        float normalY = Mathf.InverseLerp(minMundo.y, maxMundo.y, jugador.position.y);
+        if (!inicializado) return;
 
-        // 2. Borramos la niebla justo donde está el jugador
+        // 1. EL RASTRO SE DIBUJA SIEMPRE (aunque el mapa esté cerrado)
+        Vector2 posRealJugador = (Vector2)jugador.position + desplazamientoMundo;
+
+        float normalX = Mathf.InverseLerp(minMundo.x, maxMundo.x, posRealJugador.x);
+        float normalY = Mathf.InverseLerp(minMundo.y, maxMundo.y, posRealJugador.y);
+
         int posX = Mathf.RoundToInt(normalX * anchoTextura);
         int posY = Mathf.RoundToInt(normalY * altoTextura);
-        RevelarArea(posX, posY, radioPincel);
+        Vector2 posicionActualTextura = new Vector2(posX, posY);
 
-        // 3. Movemos el icono rojo en el mapa usando los límites de UI
-        if (iconoJugador != null)
+        // Dibujamos la línea continua desde la última posición conocida
+        DibujarLinea(ultimaPosicionTextura, posicionActualTextura);
+        ultimaPosicionTextura = posicionActualTextura;
+
+        // 2. LA UI SOLO SE ACTUALIZA SI EL PANEL DEL MAPA ESTÁ ABIERTO
+        if (gameObject.activeInHierarchy && iconoJugador != null && imagenNieblaUI != null)
         {
-            float uiX = Mathf.Lerp(minUI.x, maxUI.x, normalX);
-            float uiY = Mathf.Lerp(minUI.y, maxUI.y, normalY);
+            RectTransform panelRect = imagenNieblaUI.rectTransform;
+            float anchoUI = panelRect.rect.width;
+            float altoUI = panelRect.rect.height;
+
+            float uiX = (normalX - 0.5f) * anchoUI;
+            float uiY = (normalY - 0.5f) * altoUI;
+
             iconoJugador.anchoredPosition = new Vector2(uiX, uiY);
         }
     }
 
-    void RevelarArea(int xCentral, int yCentral, int radio)
+    void DibujarLinea(Vector2 p1, Vector2 p2)
     {
+        int x0 = (int)p1.x;
+        int y0 = (int)p1.y;
+        int x1 = (int)p2.x;
+        int y1 = (int)p2.y;
+
+        int dx = Mathf.Abs(x1 - x0);
+        int dy = Mathf.Abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int err = dx - dy;
+
         bool huboCambios = false;
 
-        for (int x = -radio; x <= radio; x++)
+        while (true)
         {
-            for (int y = -radio; y <= radio; y++)
-            {
-                int px = xCentral + x;
-                int py = yCentral + y;
+            if (PintarPunto(x0, y0)) huboCambios = true;
 
-                if (px >= 0 && px < anchoTextura && py >= 0 && py < altoTextura)
-                {
-                    if (x * x + y * y <= radio * radio)
-                    {
-                        texturaNiebla.SetPixel(px, py, new Color(0, 0, 0, 0));
-                        huboCambios = true;
-                    }
-                }
-            }
+            if (x0 == x1 && y0 == y1) break;
+            int e2 = 2 * err;
+            if (e2 > -dy) { err -= dy; x0 += sx; }
+            if (e2 < dx) { err += dx; y0 += sy; }
         }
 
         if (huboCambios)
         {
             texturaNiebla.Apply();
         }
+    }
+
+    bool PintarPunto(int xCentral, int yCentral)
+    {
+        bool cambio = false;
+        int radioSq = radioPincel * radioPincel;
+
+        for (int x = -radioPincel; x <= radioPincel; x++)
+        {
+            for (int y = -radioPincel; y <= radioPincel; y++)
+            {
+                int px = xCentral + x;
+                int py = yCentral + y;
+
+                if (px >= 0 && px < anchoTextura && py >= 0 && py < altoTextura)
+                {
+                    if (x * x + y * y <= radioSq)
+                    {
+                        if (texturaNiebla.GetPixel(px, py).a > 0)
+                        {
+                            texturaNiebla.SetPixel(px, py, Color.clear);
+                            cambio = true;
+                        }
+                    }
+                }
+            }
+        }
+        return cambio;
     }
 }
