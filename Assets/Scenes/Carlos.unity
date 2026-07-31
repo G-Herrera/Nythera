@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProyectil: {fileID: 3800468597992019583, guid: d60da45eabfee1b48b329233a7e95dc4, type: 3}
-  rotadorPuntoDisparo: {fileID: 0}
+  rotadorPuntoDisparo: {fileID: 734724342}
   puntoDisparo: {fileID: 734724342}
   rangoDeteccion: 8
   cadenciaDisparo: 2
@@ -821,7 +821,7 @@ Transform:
   m_GameObject: {fileID: 62413127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -38.68, y: 3.9, z: -0.023285741}
+  m_LocalPosition: {x: -39.62, y: 3.9, z: -0.023285741}
   m_LocalScale: {x: 0.50085044, y: 0.6059, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5822,7 +5822,7 @@ Transform:
   m_GameObject: {fileID: 1042029637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.37, y: 3.88, z: -0.023285741}
+  m_LocalPosition: {x: -47.28, y: 3.88, z: -0.023285741}
   m_LocalScale: {x: 0.5271, y: 0.6059, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
