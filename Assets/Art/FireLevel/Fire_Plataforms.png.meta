@@ -1,0 +1,1359 @@
+fileFormatVersion: 2
+guid: 6af0348cab1b9734a966089ab8d6bfef
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Fire_Plataforms_0
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 866
+        width: 173
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e2a7d2c1d4afe4498df9dd554c05741
+      internalID: -1395065636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_1
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 850
+        width: 169
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4756ceb172cfc1649aa2d68cd5be8bf0
+      internalID: 1847246891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_2
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 842
+        width: 400
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b490ae9dc597a4948b1d7e4293f69f2d
+      internalID: -1717689798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_3
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 964
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d6d0ef99d771564ba1f7e37d7ff8020
+      internalID: -1045617203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_4
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 816
+        width: 241
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951b861fbdd492049a24fc18ff44642d
+      internalID: -1526682020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_5
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 866
+        width: 181
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75543ef3a951e8141a1ecedca5bfc517
+      internalID: -1003195722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_6
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 871
+        width: 237
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac76f89b1b83de4d8e5a6b18d3da76b
+      internalID: -1637573465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_7
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 728
+        width: 257
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6caea0c871a8bf34db095c5d0b22bb80
+      internalID: 1260481960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_8
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 706
+        width: 472
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e78549e6b53f03b41ab60814295cc60f
+      internalID: 446569034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_9
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 658
+        width: 442
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25015b8b517299c48abb0476b08eb663
+      internalID: 826276820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 679
+        width: 208
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a6070b03a10e624c9289aa58593a5a5
+      internalID: 1627871098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 532
+        width: 424
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69539b7b416876d43884b90986fb2190
+      internalID: 1581402725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_12
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 506
+        width: 329
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1604e19512ba9b4f8be0b549a30ea7f
+      internalID: 367904689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_13
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 514
+        width: 136
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4514d8011c50f4e82d642ab5634c16
+      internalID: 1985664780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_14
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 520
+        width: 169
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b3986abc924eba428cbb7085b364cbd
+      internalID: -231871026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_15
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 635
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126879802109bc547af1fa972548a0a5
+      internalID: 387172438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_16
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 519
+        width: 330
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68e4c4d6dfa946844839dc89980c04ea
+      internalID: 2110070910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_17
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 351
+        width: 161
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 061cf105161ed3745bf5bc18b5bf5962
+      internalID: -101534973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_18
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 301
+        width: 296
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb2c6c682a6a4d54a8f6bbec968e2d09
+      internalID: -1190441598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_19
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 328
+        width: 298
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1356e65617b75e4991f4acf886189b5
+      internalID: 1427560765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_20
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 338
+        width: 201
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c10fd1e721bfea14bacb03f28444eb0c
+      internalID: -821439327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_21
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 492
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d86ddde3aa951f5489fa384c12708bcf
+      internalID: 1925259410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_22
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 352
+        width: 121
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da6ea4d9b325eb443afda44b27387ac3
+      internalID: 244915879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_23
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 368
+        width: 159
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a50e5d0337b75be488937c4f997fb838
+      internalID: 392845880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_24
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 368
+        width: 166
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2042a9c1de97b0b42bf09d587706e43b
+      internalID: -1561145198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_25
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 140
+        width: 336
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b1e0455b1136614ebc1049d517dd749
+      internalID: -1270013575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_26
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 324
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703d83e8bbaa8a94f9fa9bbdfff25bad
+      internalID: -1968328948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_27
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 184
+        width: 235
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac3d3c4f9c90fd4f8fbf068becfdd70
+      internalID: -348353214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_28
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 304
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649133bba5d35d8428fdb4f25ee4fca8
+      internalID: -1008753301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_29
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 305
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff457428ca3d3354db1911c8be8b8d11
+      internalID: -783395203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_30
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 256
+        width: 384
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e65736dd05758274fa171346d0c857d3
+      internalID: 459068320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_31
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 191
+        width: 169
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeee6f964d2f0bd4b921e45c2ea4fbeb
+      internalID: -621463933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_32
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 126
+        width: 197
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5bbdf10e3c2a414eb6a02333aad63ce
+      internalID: -89609624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_33
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 295
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1fba0eb2daded748a890b25f2071aab
+      internalID: -253584908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_34
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 195
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0d18085a2bbe5f4a83dd92434744e0b
+      internalID: -646325401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_35
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 192
+        width: 183
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8acc72d6f5e3daf4eab46bcac903d53d
+      internalID: -2018600675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_36
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 120
+        width: 326
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef4066fddedb0f479875a418194af0c
+      internalID: -27337642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_37
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 4
+        width: 142
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1e2efabe09fb474087d6b39522d9d7a
+      internalID: -1883330980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_38
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 137
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58cec06a03d91b74ebcf3ddc24559007
+      internalID: 1785113701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_39
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 143
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddbb9bee7117dd342bccc5b06c98131e
+      internalID: -609817134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_40
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 129
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb38144ac5883d42a778da78ade5235
+      internalID: -2028462838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_41
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 56
+        width: 178
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96cff921967d7f84dbabd9d8ca031c69
+      internalID: 1920558417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_42
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 105
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b7741b8a0c32344b8987688355d393
+      internalID: -1235559903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_43
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 3
+        width: 178
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa8de79d48b7d7d41811fd946de019d9
+      internalID: -200152668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_44
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 56
+        width: 217
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb6fc6a87a731cc42901ddf70e46abdf
+      internalID: 112987650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_45
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 2
+        width: 226
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f0ca97f9d5cd074781c7edd7dbf9f8e
+      internalID: -789383138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_46
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 117
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ba480400778a69498aa10329f3cf920
+      internalID: -987994611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_47
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 116
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6411daa9d16713040a0884088b28b548
+      internalID: -57432493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_48
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 88
+        width: 67
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feabbd8d1da73a749a07336a26b403c8
+      internalID: 847703269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_49
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 2
+        width: 75
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d08f8abb24364114d9fba214da14b49f
+      internalID: 1194596967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_50
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 93
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c381f8e4257f241a1bfae1bf194f96
+      internalID: -79650724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_51
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 48
+        width: 58
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3b3b05264a2634185a77aab235a051
+      internalID: -941920250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_52
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 54
+        width: 98
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd885f9f08563e4a894b26f8dcbef1d
+      internalID: 138117116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_53
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 48
+        width: 109
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1677a7eccb8e1c7429d6d076dfe6b274
+      internalID: 335155006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_54
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 56
+        width: 77
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5035fd1a5e8005c48abb7df0eb2ca832
+      internalID: 1641346290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Plataforms_55
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 57
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc97cb423f1dda245b3ab37ff3726c16
+      internalID: 596070625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Fire_Plataforms_0: -1395065636
+      Fire_Plataforms_1: 1847246891
+      Fire_Plataforms_10: 1627871098
+      Fire_Plataforms_11: 1581402725
+      Fire_Plataforms_12: 367904689
+      Fire_Plataforms_13: 1985664780
+      Fire_Plataforms_14: -231871026
+      Fire_Plataforms_15: 387172438
+      Fire_Plataforms_16: 2110070910
+      Fire_Plataforms_17: -101534973
+      Fire_Plataforms_18: -1190441598
+      Fire_Plataforms_19: 1427560765
+      Fire_Plataforms_2: -1717689798
+      Fire_Plataforms_20: -821439327
+      Fire_Plataforms_21: 1925259410
+      Fire_Plataforms_22: 244915879
+      Fire_Plataforms_23: 392845880
+      Fire_Plataforms_24: -1561145198
+      Fire_Plataforms_25: -1270013575
+      Fire_Plataforms_26: -1968328948
+      Fire_Plataforms_27: -348353214
+      Fire_Plataforms_28: -1008753301
+      Fire_Plataforms_29: -783395203
+      Fire_Plataforms_3: -1045617203
+      Fire_Plataforms_30: 459068320
+      Fire_Plataforms_31: -621463933
+      Fire_Plataforms_32: -89609624
+      Fire_Plataforms_33: -253584908
+      Fire_Plataforms_34: -646325401
+      Fire_Plataforms_35: -2018600675
+      Fire_Plataforms_36: -27337642
+      Fire_Plataforms_37: -1883330980
+      Fire_Plataforms_38: 1785113701
+      Fire_Plataforms_39: -609817134
+      Fire_Plataforms_4: -1526682020
+      Fire_Plataforms_40: -2028462838
+      Fire_Plataforms_41: 1920558417
+      Fire_Plataforms_42: -1235559903
+      Fire_Plataforms_43: -200152668
+      Fire_Plataforms_44: 112987650
+      Fire_Plataforms_45: -789383138
+      Fire_Plataforms_46: -987994611
+      Fire_Plataforms_47: -57432493
+      Fire_Plataforms_48: 847703269
+      Fire_Plataforms_49: 1194596967
+      Fire_Plataforms_5: -1003195722
+      Fire_Plataforms_50: -79650724
+      Fire_Plataforms_51: -941920250
+      Fire_Plataforms_52: 138117116
+      Fire_Plataforms_53: 335155006
+      Fire_Plataforms_54: 1641346290
+      Fire_Plataforms_55: 596070625
+      Fire_Plataforms_6: -1637573465
+      Fire_Plataforms_7: 1260481960
+      Fire_Plataforms_8: 446569034
+      Fire_Plataforms_9: 826276820
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

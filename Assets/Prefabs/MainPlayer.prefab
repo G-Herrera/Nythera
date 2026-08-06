@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 812527366100066806}
   - component: {fileID: 2176835406120166369}
   - component: {fileID: 205790337782165124}
+  - component: {fileID: 3310595566650238309}
   - component: {fileID: 9102457620214652666}
   - component: {fileID: 5843948699404969544}
   - component: {fileID: 4934584248657967745}
@@ -489,6 +490,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &3310595566650238309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731253234585557553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa4f6b51d737234c93976acb2295995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialWeaponIndex: 0
+  weapons:
+  - weaponName: Sword
+    weaponIcon: {fileID: 21300000, guid: f104e50e3161a2342b3ea2e6c3ce34ce, type: 3}
+    weaponObject: {fileID: 2645330281920971878}
+  - weaponName: PurpleSword
+    weaponIcon: {fileID: 21300000, guid: ad731f83828597a4a93bbb6d1e84ba60, type: 3}
+    weaponObject: {fileID: 0}
+  - weaponName: OrangeSword
+    weaponIcon: {fileID: 21300000, guid: f2872032aeb9b0c4da4eea91da8f612a, type: 3}
+    weaponObject: {fileID: 0}
+  - weaponName: GreenSword
+    weaponIcon: {fileID: 21300000, guid: de31f264f4bb18642999149be804c7d0, type: 3}
+    weaponObject: {fileID: 0}
+  - weaponName: BlueSword
+    weaponIcon: {fileID: 21300000, guid: b3c8fc4f5c03c7a4fbc2150c7b5e43e5, type: 3}
+    weaponObject: {fileID: 0}
 --- !u!114 &9102457620214652666
 MonoBehaviour:
   m_ObjectHideFlags: 0
