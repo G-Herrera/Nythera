@@ -137,7 +137,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3bd862a3b6d762943bc9616d8cf41566, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,7 +184,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 3.95, y: 3.84}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -505,19 +505,19 @@ MonoBehaviour:
   initialWeaponIndex: 0
   weapons:
   - weaponName: Sword
-    weaponIcon: {fileID: 21300000, guid: f104e50e3161a2342b3ea2e6c3ce34ce, type: 3}
+    weaponIcon: {fileID: 21300000, guid: 3bd862a3b6d762943bc9616d8cf41566, type: 3}
     weaponObject: {fileID: 2645330281920971878}
   - weaponName: PurpleSword
-    weaponIcon: {fileID: 21300000, guid: ad731f83828597a4a93bbb6d1e84ba60, type: 3}
+    weaponIcon: {fileID: 21300000, guid: bdd4925eb9d4380458cda2c1aee58204, type: 3}
     weaponObject: {fileID: 0}
   - weaponName: OrangeSword
-    weaponIcon: {fileID: 21300000, guid: f2872032aeb9b0c4da4eea91da8f612a, type: 3}
+    weaponIcon: {fileID: 21300000, guid: b26d1821c5912694cb1d4481083018cd, type: 3}
     weaponObject: {fileID: 0}
   - weaponName: GreenSword
-    weaponIcon: {fileID: 21300000, guid: de31f264f4bb18642999149be804c7d0, type: 3}
+    weaponIcon: {fileID: 21300000, guid: 00ddea1a71bb0d4438573aeb6a472911, type: 3}
     weaponObject: {fileID: 0}
   - weaponName: BlueSword
-    weaponIcon: {fileID: 21300000, guid: b3c8fc4f5c03c7a4fbc2150c7b5e43e5, type: 3}
+    weaponIcon: {fileID: 21300000, guid: 1926bda330159da4b87a4866a351162a, type: 3}
     weaponObject: {fileID: 0}
 --- !u!114 &9102457620214652666
 MonoBehaviour:
