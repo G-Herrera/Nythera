@@ -13,6 +13,25 @@ public class HUDWeaponIcon : MonoBehaviour
             weaponIconImage = GetComponent<Image>();
     }
 
+    public void Initialize(PlayerWeaponSystem weaponSystem)
+    {
+        if (playerWeaponSystem != null)
+            playerWeaponSystem.OnWeaponChanged -= UpdateWeaponIcon;
+
+        playerWeaponSystem = weaponSystem;
+
+        if (playerWeaponSystem == null)
+        {
+            Debug.LogError("HUDWeaponIcon recibió un PlayerWeaponSystem nulo.");
+            return;
+        }
+
+        playerWeaponSystem.OnWeaponChanged += UpdateWeaponIcon;
+
+        if (playerWeaponSystem.CurrentWeapon != null)
+            UpdateWeaponIcon(playerWeaponSystem.CurrentWeapon);
+    }
+
     private void OnEnable()
     {
         if (playerWeaponSystem == null)
