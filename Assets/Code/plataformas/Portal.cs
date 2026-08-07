@@ -1,17 +1,19 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // <-- Añadimos esto para forzar la carga directa
 
 public class PortalNivel : MonoBehaviour
 {
-    [SerializeField] private string nombreSiguienteNivel; // Escribe "Carlos" aquí
+    public string nombreSiguienteNivel = "Carlos";
     private bool jugadorCerca = false;
 
     private void Update()
     {
-        // Si el jugador está cerca Y presiona la tecla 'E'
         if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
-            // Usamos tu Gestor Global para ir a la escena
-            GestorNiveles.instancia.IrANivel(nombreSiguienteNivel);
+            Debug.Log("Intentando cargar directamente la escena: " + nombreSiguienteNivel);
+
+            // Forzamos la carga directa por código de Unity sin pasar por el GestorNiveles
+            SceneManager.LoadScene(nombreSiguienteNivel);
         }
     }
 
@@ -20,7 +22,6 @@ public class PortalNivel : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             jugadorCerca = true;
-            // Opcional: Aquí podrías activar un icono de "Presiona E"
         }
     }
 
