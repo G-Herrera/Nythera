@@ -100,8 +100,15 @@ public class MainMenuController : MonoBehaviour
 
     private void StartNewGame()
     {
-        //Load the first level or main game scene
-        SceneManager.LoadScene("scn_PlayerController");
+        // Verifica que el gestor exista antes de llamar
+        if (GestorNiveles.instancia != null)
+        {
+            GestorNiveles.instancia.IrANivel("scn_PlayerController");
+        }
+        else
+        {
+            Debug.LogError("¡No pusiste el GestorNiveles en la escena del Menú!");
+        }
     }
 
     private void OpenOptions()
