@@ -33,6 +33,13 @@ public class WeaponWheelController : MonoBehaviour
         if(weaponWheel !=null) weaponWheel.SetActive(false);
     }
 
+    public void Initialize(PlayerWeaponSystem weaponSystem)
+    {
+        playerWeaponSystem = weaponSystem;
+
+        if (playerWeaponSystem == null)
+            Debug.LogError("WeaponWheelController recibió un PlayerWeaponSystem nulo.");
+    }
     private void OnEnable()
     {
         // Enable the input actions
