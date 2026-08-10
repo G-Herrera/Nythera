@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Agregamos [RequireComponent] para que el Spawner siempre tenga vida
 [RequireComponent(typeof(SistemaVida))]
-public class SpawnerReactivo : MonoBehaviour
+public class SpawnerReactivo : MonoBehaviour, IDamageable // <-- 1. Añadimos la interfaz aquí
 {
     public GameObject enemigoPrefab;
     public Transform[] waypointsCompartidos;
@@ -14,18 +13,19 @@ public class SpawnerReactivo : MonoBehaviour
     private List<GameObject> enemigosVivos = new List<GameObject>();
     private Transform jugador;
     private float tiempoSiguienteSpawn;
-    private SistemaVida vidaSpawner; // Referencia a su propia vida
+    private SistemaVida vidaSpawner;
 
     void Start()
     {
-        jugador = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject objJugador = GameObject.FindGameObjectWithTag("Player");
+        if (objJugador != null) jugador = objJugador.transform;
+
         vidaSpawner = GetComponent<SistemaVida>();
     }
 
     void Update()
     {
-        // SI EL SPAWNER ESTÁ DESACTIVADO (por muerte), ya no hacemos nada
-        if (!gameObject.activeInHierarchy) return;
+        if (!gameObject.activeInHierarchy || jugador == null) return;
 
         enemigosVivos.RemoveAll(e => e == null || !e.activeInHierarchy);
 
@@ -47,5 +47,17 @@ public class SpawnerReactivo : MonoBehaviour
         EnemigoVeloz v = nuevo.GetComponent<EnemigoVeloz>();
         if (v != null) v.puntosPatrullaje = waypointsCompartidos;
         enemigosVivos.Add(nuevo);
+    }
+
+    // 2. Método obligatorio de IDamageable para que la espada le haga daño
+    public void TakeDamage(AttackData data)
+    {
+        if (vidaSpawner != null)
+        {
+            vidaSpawner.RecibirDano(data);
+
+            // Si la vida llega a cero, el SistemaVida se encargará de disparar 
+            // el evento OnMorir que tengas configurado en el Inspector de este spawner.
+        }
     }
 }
