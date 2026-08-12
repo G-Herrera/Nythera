@@ -7,6 +7,7 @@ public class EnemigoVeloz : MonoBehaviour, IDamageable
     [Header("Configuración")]
     public float velocidad = 6f;
     public int dañoAlJugador = 10;
+    public float rangoVisionPersecucion = 15f;
     private bool siendoEmpujado = false;
 
     [Header("Ruta (Opcional)")]
@@ -14,40 +15,87 @@ public class EnemigoVeloz : MonoBehaviour, IDamageable
     private int indicePuntoActual = 0;
 
     private Rigidbody2D rb;
+    private Transform jugador;
+    private bool mirandoDerecha = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameObject objJugador = GameObject.FindGameObjectWithTag("Player");
+        if (objJugador != null) jugador = objJugador.transform;
     }
 
     void Update()
     {
         if (siendoEmpujado) return;
 
-        if (puntosPatrullaje != null && puntosPatrullaje.Length > 0)
+        // 1. Validar si el jugador está vivo
+        bool jugadorVivo = false;
+        if (jugador != null)
+        {
+            SistemaVida vidaPlayer = jugador.GetComponent<SistemaVida>();
+            if (vidaPlayer != null && vidaPlayer.ObtenerVidaActual() > 0)
+            {
+                jugadorVivo = true;
+            }
+        }
+
+        // 2. Si el jugador murió o no existe, el enemigo se queda completamente quieto
+        if (!jugadorVivo)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            return;
+        }
+
+        // 3. Ir directo al jugador o patrullar de forma segura
+        float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
+
+        if (distanciaAlJugador <= rangoVisionPersecucion)
+        {
+            Vector2 direccion = (jugador.position - transform.position).normalized;
+            rb.velocity = new Vector2(direccion.x * velocidad, rb.velocity.y);
+            ActualizarGiro(direccion.x);
+        }
+        else if (puntosPatrullaje != null && puntosPatrullaje.Length > 0 && puntosPatrullaje[0] != null)
         {
             Transform destino = puntosPatrullaje[indicePuntoActual];
-            Vector2 direccion = (destino.position - transform.position).normalized;
-            rb.velocity = new Vector2(direccion.x * velocidad, rb.velocity.y);
-
-            if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+            if (destino != null)
             {
-                indicePuntoActual = (indicePuntoActual + 1) % puntosPatrullaje.Length;
+                Vector2 direccionPatrulla = (destino.position - transform.position).normalized;
+                rb.velocity = new Vector2(direccionPatrulla.x * velocidad, rb.velocity.y);
+                ActualizarGiro(direccionPatrulla.x);
+
+                if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+                {
+                    indicePuntoActual = (indicePuntoActual + 1) % puntosPatrullaje.Length;
+                }
             }
+        }
+        else
+        {
+            // Si no hay jugador cerca y no hay waypoints válidos, se queda quieto sin dar errores
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
+
+    private void ActualizarGiro(float direccionX)
+    {
+        if (direccionX > 0.05f)
+        {
+            mirandoDerecha = true;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (direccionX < -0.05f)
+        {
+            mirandoDerecha = false;
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 
     public void TakeDamage(AttackData data)
     {
-        // ¿Esto se ejecuta? Pon un Debug.Log para saberlo
-        Debug.Log("Enemigo recibiendo daño: " + data.Damage);
-
-        // 1. Esto es lo que resta la vida
         GetComponent<SistemaVida>().RecibirDano(data);
-
-        // 2. Esto es lo que mueve
         GetComponent<Knockback>().AplicarEmpuje(data);
-
         StartCoroutine(PausaMovimiento(0.2f));
     }
 

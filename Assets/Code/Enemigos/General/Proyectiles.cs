@@ -3,7 +3,7 @@ using UnityEngine;
 public class ProyectilEnemigo : MonoBehaviour
 {
     public float velocidad = 10f;
-    public int dano = 10; // Cambiado a int para que coincida con AttackData
+    public int dano = 10;
     public float tiempoVida = 3f;
 
     void Start()
@@ -24,9 +24,7 @@ public class ProyectilEnemigo : MonoBehaviour
 
             if (vida != null)
             {
-                // Creamos el paquete. Usamos 'dano' (int) y 0f para el empuje
-                // La dirección la ponemos como Vector2.zero porque es un proyectil 
-                // (a menos que quieras que el proyectil empuje al jugador, ahí pondrías una dirección)
+                // Creamos el paquete respetando los 3 argumentos del constructor de AttackData
                 AttackData ataque = new AttackData(dano, 0f, Vector2.zero);
 
                 vida.RecibirDano(ataque);
