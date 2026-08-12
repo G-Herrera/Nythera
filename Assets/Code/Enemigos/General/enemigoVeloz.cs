@@ -47,33 +47,33 @@ public class EnemigoVeloz : MonoBehaviour, IDamageable
             return;
         }
 
-        // 3. Ir directo al jugador
+        // 3. Ir directo al jugador o patrullar de forma segura
         float distanciaAlJugador = Vector2.Distance(transform.position, jugador.position);
 
         if (distanciaAlJugador <= rangoVisionPersecucion)
         {
             Vector2 direccion = (jugador.position - transform.position).normalized;
             rb.velocity = new Vector2(direccion.x * velocidad, rb.velocity.y);
-
-            // Rota hacia el jugador
             ActualizarGiro(direccion.x);
         }
-        else if (puntosPatrullaje != null && puntosPatrullaje.Length > 0)
+        else if (puntosPatrullaje != null && puntosPatrullaje.Length > 0 && puntosPatrullaje[0] != null)
         {
             Transform destino = puntosPatrullaje[indicePuntoActual];
-            Vector2 direccionPatrulla = (destino.position - transform.position).normalized;
-            rb.velocity = new Vector2(direccionPatrulla.x * velocidad, rb.velocity.y);
-
-            // Rota hacia la patrulla
-            ActualizarGiro(direccionPatrulla.x);
-
-            if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+            if (destino != null)
             {
-                indicePuntoActual = (indicePuntoActual + 1) % puntosPatrullaje.Length;
+                Vector2 direccionPatrulla = (destino.position - transform.position).normalized;
+                rb.velocity = new Vector2(direccionPatrulla.x * velocidad, rb.velocity.y);
+                ActualizarGiro(direccionPatrulla.x);
+
+                if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+                {
+                    indicePuntoActual = (indicePuntoActual + 1) % puntosPatrullaje.Length;
+                }
             }
         }
         else
         {
+            // Si no hay jugador cerca y no hay waypoints válidos, se queda quieto sin dar errores
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
