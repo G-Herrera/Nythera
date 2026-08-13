@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PortalFinJefe : MonoBehaviour
 {
-    [Header("Configuración de Carga")]
-    public string nivelDestino = "scn_PlayerController";
-    public string escenaCarga = "LoadingScene";
+    [Header("Configuración")]
+    [SerializeField] private string nombreSiguienteNivel = "scn_FireLevel"; // Nombre de tu siguiente nivel
 
-    [Header("Referencias")]
+    [Header("Referencias del Jefe")]
     public GameObject jefeObjetivo;
     public SpriteRenderer spritePortal;
 
@@ -17,8 +15,7 @@ public class PortalFinJefe : MonoBehaviour
     void Start()
     {
         colisionador = GetComponent<Collider2D>();
-
-        // El portal arranca completamente oculto e inactivo
+        // El portal arranca oculto y apagado
         if (colisionador) colisionador.enabled = false;
         if (spritePortal) spritePortal.enabled = false;
     }
@@ -27,53 +24,31 @@ public class PortalFinJefe : MonoBehaviour
     {
         if (activado) return;
 
-        bool debeActivarse = false;
+        // Verificamos si el jefe fue derrotado (se destruyó o se desactivó)
+        bool jefeMuerto = (jefeObjetivo == null);
+        if (!jefeMuerto && !jefeObjetivo.activeInHierarchy) jefeMuerto = true;
 
-        // Condición 1: Si el jefe desapareció de la jerarquía (fue destruido con Destroy)
-        if (jefeObjetivo == null)
+        if (jefeMuerto)
         {
-            debeActivarse = true;
+            activado = true;
+            if (colisionador) colisionador.enabled = true;
+            if (spritePortal) spritePortal.enabled = true;
         }
-        else
-        {
-            // Condición 2: Si el jefe sigue en escena, revisamos si su objeto fue desactivado (gameObject.activeInHierarchy == false)
-            if (!jefeObjetivo.activeInHierarchy)
-            {
-                debeActivarse = true;
-            }
-            else
-            {
-                // Condición 3: Intentamos leer su vida mediante reflexión o componentes comunes si existe
-                // (Esto evita que falle si el método se llama distinto)
-                SistemaVida vidaJefe = jefeObjetivo.GetComponent<SistemaVida>();
-                if (vidaJefe != null && vidaJefe.ObtenerVidaActual() <= 0)
-                {
-                    debeActivarse = true;
-                }
-            }
-        }
-
-        if (debeActivarse)
-        {
-            ActivarPortal();
-        }
-    }
-
-    void ActivarPortal()
-    {
-        activado = true;
-        if (colisionador) colisionador.enabled = true;
-        if (spritePortal) spritePortal.enabled = true;
-        Debug.Log("¡Jefe derrotado! El portal se ha abierto.");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Al cruzar el portal del jefe ya activo, usa el GestorNiveles igual que tu otro portal
         if (collision.CompareTag("Player") && activado)
         {
-            PlayerPrefs.SetString("NivelDestino", nivelDestino);
-            Debug.Log("Cargando escena de transición: " + escenaCarga);
-            SceneManager.LoadScene(escenaCarga);
+            if (GestorNiveles.instancia != null)
+            {
+                GestorNiveles.instancia.IrANivel(nombreSiguienteNivel);
+            }
+            else
+            {
+                Debug.LogError("¡No se encontró el GestorNiveles en la escena!");
+            }
         }
     }
 }

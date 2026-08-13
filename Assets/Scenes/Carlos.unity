@@ -3745,8 +3745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2b1ff81875c8f4099d6c3fc684831e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nivelDestino: scn_PlayerController
-  escenaCarga: LoadingScene
+  nombreSiguienteNivel: scn_PlayerController
   jefeObjetivo: {fileID: 1222199070}
   spritePortal: {fileID: 867373062}
 --- !u!212 &867373062
@@ -4368,7 +4367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfaa5142b7d017946a3af4ce655f81e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 70
+  vidaMaxima: 50
   esInvulnerable: 0
   OnRecibirDano:
     m_PersistentCalls:
