@@ -146,4 +146,4 @@ MonoBehaviour:
   velocidad: 10
   dano: 15
   tiempoVida: 3
-  tiempoCongelamiento: 0.2
+  tiempoCongelamiento: 1
