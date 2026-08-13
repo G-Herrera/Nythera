@@ -1,28 +1,30 @@
 using UnityEngine;
 
-public class MuroMortal : MonoBehaviour
+public class MuroMuerte : MonoBehaviour
 {
-    [Header("Configuración")]
-    public int dañoAlTocar = 999; // Un valor alto para asegurar la muerte
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verificamos si el objeto que toca es el jugador
+        // Verificamos si lo que tocó el muro es el jugador
         if (collision.CompareTag("Player"))
         {
-            SistemaVida vidaJugador = collision.GetComponent<SistemaVida>();
+            // 1. Buscamos el script de respawn que pusiste en el jugador
+            SistemaRespawn respawn = collision.GetComponent<SistemaRespawn>();
 
-            if (vidaJugador != null)
+            if (respawn != null)
             {
-                // Creamos un paquete de daño que sea mortal
-                // Usamos 0 de empuje porque el jugador morirá inmediatamente
-                AttackData ataqueMortal = new AttackData(dañoAlTocar, 0f, Vector2.zero);
-
-                // Aplicamos el daño al jugador
-                vidaJugador.RecibirDano(ataqueMortal);
-
-                Debug.Log("¡El jugador tocó el muro de la muerte!");
+                // Llamamos a la función para que reaparezca sin reiniciar el nivel
+                respawn.MorirYReaparecer();
             }
+            else
+            {
+                // Por si acaso al jugador le faltara el script, lo mandamos a unas coordenadas seguras o de inicio
+                Debug.LogWarning("El jugador no tiene el script SistemaRespawn asignado.");
+                collision.transform.position = new Vector2(0f, 0f);
+            }
+
+            // Opcional: Si quieres que además de reaparecer pierda vida, puedes llamar a su sistema de vida aquí:
+            // SistemaVida vida = collision.GetComponent<SistemaVida>();
+            // if (vida != null) { vida.RecibirDano(...); }
         }
     }
 }
