@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Carlos.unity
     guid: 8f874906a83b94e4abb543c45627a343
+  - enabled: 1
+    path: Assets/Scenes/scn_FireLevel.unity
+    guid: 3b3e528f7120ab04783afadb61008c4c
   m_configObjects: {}
