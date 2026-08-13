@@ -37,72 +37,86 @@ public class ProyectilLanza : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 1. SI COLISIONA CON LA ESPADA O EL ARMA DEL JUGADOR
-        // (Asegúrate de que tu espada tenga el Tag "Sword" o el nombre con el que la detectes)
+        // 1. Si choca con la espada, se destruye
         if (collision.CompareTag("Sword") || collision.name.Contains("Sword"))
         {
-            // Opcional: Aquí puedes poner efectos de partículas de destrucción si gustas
-            Destroy(gameObject); // Se destruye y se anula cualquier efecto
+            Destroy(gameObject);
             return;
         }
 
-        // 2. SI COLISIONA CON EL JUGADOR (Daño y congelamiento normal)
+        // 2. Si choca con el jugador
         if (collision.CompareTag("Player"))
         {
             SistemaVida vida = collision.GetComponent<SistemaVida>();
-
             if (vida != null)
             {
                 AttackData ataque = new AttackData(dano, 0f, Vector2.zero);
                 vida.RecibirDano(ataque);
             }
 
-            StartCoroutine(CongelarJugadorTemporalmente(collision.gameObject));
-            Destroy(gameObject);
+            // Aplicamos el efecto directamente buscando los componentes en el jugador
+            GameObject jugadorObj = collision.gameObject;
+
+            // Buscamos el script de movimiento
+            Behaviour scriptMovimiento = jugadorObj.GetComponent("PlayerController") as Behaviour;
+            if (scriptMovimiento == null)
+                scriptMovimiento = jugadorObj.GetComponent("MovimientoJugador") as Behaviour;
+
+            // Buscamos el SpriteRenderer para el color
+            SpriteRenderer spritePlayer = jugadorObj.GetComponentInChildren<SpriteRenderer>();
+
+            // Ejecutamos la congelación usando un componente temporal o estático que no muera con la lanza,
+            // o delegamos la tarea ejecutando una corrutina respaldada en el GameObject del jugador:
+            JugadorEfectosTemporales manejadorEfectos = jugadorObj.GetComponent<JugadorEfectosTemporales>();
+            if (manejadorEfectos == null)
+            {
+                manejadorEfectos = jugadorObj.AddComponent<JugadorEfectosTemporales>();
+            }
+            manejadorEfectos.IniciarCongelamiento(scriptMovimiento, spritePlayer, tiempoCongelamiento);
+
+            Destroy(gameObject); // La lanza se destruye segura sin cortar el efecto
         }
-        // 3. SI COLISIONA CON EL SUELO
         else if (collision.CompareTag("Suelo"))
         {
             Destroy(gameObject);
         }
     }
+}
 
-    private IEnumerator CongelarJugadorTemporalmente(GameObject jugador)
+// ==========================================
+// CLASE AUXILIAR INTERNA (Todo en el mismo archivo)
+// ==========================================
+public class JugadorEfectosTemporales : MonoBehaviour
+{
+    public void IniciarCongelamiento(Behaviour scriptMovimiento, SpriteRenderer spritePlayer, float duracion)
     {
-        Behaviour scriptMovimiento = jugador.GetComponent("PlayerController") as Behaviour;
-        if (scriptMovimiento == null)
-            scriptMovimiento = jugador.GetComponent("MovimientoJugador") as Behaviour;
+        StartCoroutine(RutinaCongelar(scriptMovimiento, spritePlayer, duracion));
+    }
 
-        if (scriptMovimiento != null)
-        {
-            scriptMovimiento.enabled = false;
-        }
+    private IEnumerator RutinaCongelar(Behaviour scriptMovimiento, SpriteRenderer spritePlayer, float duracion)
+    {
+        // Desactivar movimiento
+        if (scriptMovimiento != null) scriptMovimiento.enabled = false;
 
-        Rigidbody2D rbPlayer = jugador.GetComponent<Rigidbody2D>();
-        if (rbPlayer != null)
-        {
-            rbPlayer.velocity = Vector2.zero;
-        }
+        Rigidbody2D rbPlayer = GetComponent<Rigidbody2D>();
+        if (rbPlayer != null) rbPlayer.velocity = Vector2.zero;
 
-        SpriteRenderer spritePlayer = jugador.GetComponentInChildren<SpriteRenderer>();
+        // Cambiar color
         Color colorOriginal = Color.white;
-
         if (spritePlayer != null)
         {
             colorOriginal = spritePlayer.color;
-            spritePlayer.color = new Color(0.4f, 0.8f, 1f);
+            spritePlayer.color = new Color(0.4f, 0.8f, 1f); // Azul hielo
         }
 
-        yield return new WaitForSeconds(tiempoCongelamiento);
+        // Esperar el tiempo exacto (vive en el jugador, por lo que nunca se interrumpe)
+        yield return new WaitForSeconds(duracion);
 
-        if (spritePlayer != null)
-        {
-            spritePlayer.color = colorOriginal;
-        }
+        // Restaurar
+        if (spritePlayer != null) spritePlayer.color = colorOriginal;
+        if (scriptMovimiento != null) scriptMovimiento.enabled = true;
 
-        if (scriptMovimiento != null)
-        {
-            scriptMovimiento.enabled = true;
-        }
+        // Se autodestruye este componente temporal al terminar
+        Destroy(this);
     }
 }
