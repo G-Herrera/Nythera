@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfaa5142b7d017946a3af4ce655f81e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vidaMaxima: 1
+  vidaMaxima: 5
   esInvulnerable: 0
   OnRecibirDano:
     m_PersistentCalls:
