@@ -6,13 +6,44 @@ public class GameplayUIController : MonoBehaviour
     [SerializeField] private HUDWeaponIcon hudWeaponIcon;
     [SerializeField] private WeaponWheelController weaponWheelController;
     [SerializeField] private HUDKeys hudKeys;
+    [SerializeField] private HUDHealthBar hudHealthBar;
 
     private void Start()
     {
+        InitializeHealth();
         InitializeWeapons();
         InitializeKeys();
     }
 
+    private void InitializeHealth()
+    {
+        GameObject player =
+            GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogWarning(
+                "GameplayUIController no encontró al Player."
+            );
+
+            return;
+        }
+
+        SistemaVida playerHealth =
+            player.GetComponent<SistemaVida>();
+
+        if (playerHealth == null)
+        {
+            Debug.LogWarning(
+                "El Player no tiene SistemaVida."
+            );
+
+            return;
+        }
+
+        if (hudHealthBar != null)
+            hudHealthBar.Initialize(playerHealth);
+    }
     private void InitializeWeapons()
     {
         PlayerWeaponSystem weaponSystem =
