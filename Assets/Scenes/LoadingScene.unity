@@ -615,6 +615,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barraProgreso: {fileID: 461667255}
+  imagenRellenoBarra: {fileID: 1335886894}
+  velocidadSuavizado: 0.5
+  colorInicio: {r: 0.47450984, g: 0.81568635, b: 0.8941177, a: 1}
+  colorMitad: {r: 0.9607844, g: 0.49411768, b: 0.20000002, a: 1}
+  colorFinal: {r: 0.47450984, g: 0.50980395, b: 0.4156863, a: 1}
 --- !u!4 &1014211670
 Transform:
   m_ObjectHideFlags: 0
