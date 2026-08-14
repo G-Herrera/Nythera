@@ -7036,6 +7036,18 @@ PrefabInstance:
       propertyPath: jugador
       value: 
       objectReference: {fileID: 1235495462}
+    - target: {fileID: 4480749017931890378, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514918426125193942, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419330179726572648, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7792132719855104226, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7114,6 +7126,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7792132719855104226, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474167916767437630, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9112769152072132821, guid: a83b5184d293cd44e97250e90f446b30, type: 3}
