@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System;
 
 public class SistemaVida : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SistemaVida : MonoBehaviour
     [Header("Eventos")]
     public UnityEvent OnRecibirDano;
     public UnityEvent OnMorir;
+    public event Action<float, float> OnVidaChanged;
 
     void Awake()
     {
@@ -27,12 +29,15 @@ public class SistemaVida : MonoBehaviour
 
         vidaActual -= data.Damage;
 
-        // Disparamos el evento (aquí conectas el parpadeo rojo o efectos)
+        if (vidaActual < 0)
+            vidaActual = 0;
+
+        OnVidaChanged?.Invoke(vidaActual, vidaMaxima);
+
         OnRecibirDano?.Invoke();
 
         if (vidaActual <= 0)
         {
-            vidaActual = 0;
             Morir();
         }
     }
@@ -41,7 +46,11 @@ public class SistemaVida : MonoBehaviour
     public void Curar(float cantidad)
     {
         vidaActual += cantidad;
-        if (vidaActual > vidaMaxima) vidaActual = vidaMaxima;
+
+        if (vidaActual > vidaMaxima)
+            vidaActual = vidaMaxima;
+
+        OnVidaChanged?.Invoke(vidaActual, vidaMaxima);
     }
 
     // Método para la invulnerabilidad (usado en el Dash del Player)
@@ -63,5 +72,6 @@ public class SistemaVida : MonoBehaviour
         OnMorir?.Invoke();
     }
 
+    public float ObtenerVidaMaxima() => vidaMaxima;
     public float ObtenerVidaActual() => vidaActual;
 }
